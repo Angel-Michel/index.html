@@ -2,21 +2,168 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Flor Amarilla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un detalle especial para Nino</title>
     <style>
-        body { 
-            margin: 0; 
-            background-color: #111; /* Fondo oscuro para resaltar la flor */
-            overflow: hidden; 
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #2b1055, #7597de);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Tarjeta / Marco estilo anime */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            max-width: 380px;
+            width: 90%;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Representación visual de Nino (Estilo Cosplay / Avatar) */
+        .character-avatar {
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(45deg, #ff6b81, #ff4757);
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.6);
+            border: 4px solid #fff;
+            position: relative;
+            animation: floatAvatar 3s ease-in-out infinite;
+        }
+
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .character-avatar span {
+            font-size: 3.5rem;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        p {
+            color: #f1f2f6;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        /* Botón interactivo */
+        .btn-gift {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-gift:hover {
+            background: #ff6b81;
+            transform: scale(1.05);
+        }
+
+        /* Contenedor del Ramo (Oculto al inicio) */
+        #bouquet-section {
+            display: none;
+            margin-top: 20px;
+            animation: fadeInBouquet 1s ease forwards;
+        }
+
+        @keyframes fadeInBouquet {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .bouquet {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+            animation: pulseBouquet 2s infinite alternate;
+        }
+
+        @keyframes pulseBouquet {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .bouquet-message {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
     </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    <script src="floramarilla.js"></script>
+
+    <div class="container">
+        <div class="card">
+            <!-- Avatar que representa a Nino en modo cosplay -->
+            <div class="character-avatar">
+                <span>🎀</span>
+            </div>
+            
+            <h1>Nino</h1>
+            <p id="main-text">Tengo una pequeña sorpresa especial preparada para ti. Haz clic en el botón para recibir tu detalle.</p>
+
+            <button class="btn-gift" id="actionBtn" onclick="revealGift()">Recibir Ramo 🌻</button>
+
+            <!-- Sección del Ramo de Rosas y Orquídeas que aparece al hacer clic -->
+            <div id="bouquet-section">
+                <div class="bouquet">💐</div>
+                <div class="bouquet-message">¡Un hermoso ramo de rosas y orquídeas amarillas para ti!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealGift() {
+            // Ocultar botón y texto anterior
+            document.getElementById('actionBtn').style.display = 'none';
+            document.getElementById('main-text').style.display = 'none';
+            
+            // Mostrar la sección del ramo con animación
+            document.getElementById('bouquet-section').style.display = 'block';
+            
+            // Cambiar el título superior opcionalmente
+            document.querySelector('h1').innerText = "¡Especial para ti!";
+        }
+    </script>
 </body>
 </html>
